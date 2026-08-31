@@ -8,7 +8,10 @@
     <linearGradient id="orange" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF7ED"/><stop offset="1" stop-color="#FFEDD5"/></linearGradient>
     <linearGradient id="slate" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F8FAFC"/><stop offset="1" stop-color="#F1F5F9"/></linearGradient>
     <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.10"/></filter>
-    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L12,6 L0,12 z" fill="#334155"/></marker>
+    <!-- Keep arrowheads at a fixed SVG size. markerUnits="strokeWidth" made
+         browser/PNG renderers multiply the head by the line width, obscuring
+         nearby labels and blocks. -->
+    <marker id="arrow" markerWidth="16" markerHeight="16" refX="14" refY="8" orient="auto" markerUnits="userSpaceOnUse" viewBox="0 0 16 16"><path d="M0,0 L16,8 L0,16 z" fill="#334155"/></marker>
     <style>
       .title{font:700 34px Arial,'PingFang SC',sans-serif;fill:#0F172A}.subtitle{font:400 17px Arial,'PingFang SC',sans-serif;fill:#64748B}
       .stage{font:700 14px Arial,'PingFang SC',sans-serif;letter-spacing:1.2px;fill:#475569}.h{font:700 22px Arial,'PingFang SC',sans-serif;fill:#0F172A}.sh{font:700 16px Arial,'PingFang SC',sans-serif;fill:#1E293B}.t{font:400 14px Arial,'PingFang SC',sans-serif;fill:#475569}.small{font:400 12px Arial,'PingFang SC',sans-serif;fill:#64748B}.metric{font:700 18px Arial,'PingFang SC',sans-serif;fill:#C2410C}.chip{font:700 12px Arial,'PingFang SC',sans-serif;fill:#334155}
@@ -88,11 +91,11 @@
 
   <path d="M1278 350 L1278 380" class="arrow2"/>
   <text x="1292" y="371" class="label">feature vector</text>
-  <rect x="1100" y="390" width="165" height="75" rx="10" class="inner" stroke="#A78BFA"/>
+  <rect x="1100" y="390" width="155" height="75" rx="10" class="inner" stroke="#A78BFA"/>
   <text x="1118" y="420" class="sh">Residual Policy</text><text x="1118" y="444" class="small">reference logits + Δθ</text>
-  <rect x="1290" y="390" width="165" height="75" rx="10" class="inner" stroke="#A78BFA"/>
-  <text x="1308" y="420" class="sh">PL Sampling</text><text x="1308" y="444" class="small">8 ordered Top-10 slates</text>
-  <path d="M1265 427 L1290 427" class="arrow2"/><text x="1268" y="412" class="label">logits</text>
+  <rect x="1300" y="390" width="155" height="75" rx="10" class="inner" stroke="#A78BFA"/>
+  <text x="1318" y="420" class="sh">PL Sampling</text><text x="1318" y="444" class="small">8 ordered Top-10 slates</text>
+  <path d="M1255 427 L1300 427" class="arrow2"/><text x="1263" y="383" class="label">logits</text>
 
   <rect x="1100" y="495" width="355" height="108" rx="10" fill="#FFFFFF" stroke="#F59E0B" stroke-width="2"/>
   <text x="1118" y="525" class="sh">Multi-objective Slate Reward</text>
@@ -103,12 +106,12 @@
   <rect x="1397" y="544" width="42" height="35" rx="8" fill="#FEF3C7"/><text x="1406" y="566" class="chip">长尾</text>
   <path d="M1372 465 L1372 495" class="arrow2"/><text x="1386" y="486" class="label">sampled slates</text>
 
-  <rect x="1100" y="630" width="165" height="78" rx="10" class="inner" stroke="#A78BFA"/>
+  <rect x="1100" y="630" width="155" height="78" rx="10" class="inner" stroke="#A78BFA"/>
   <text x="1118" y="660" class="sh">Group Advantage</text><text x="1118" y="685" class="small">within-user normalization</text>
-  <rect x="1290" y="630" width="165" height="78" rx="10" class="inner" stroke="#A78BFA"/>
-  <text x="1308" y="660" class="sh">Policy Update</text><text x="1308" y="685" class="small">PPO clip + reference KL</text>
+  <rect x="1300" y="630" width="155" height="78" rx="10" class="inner" stroke="#A78BFA"/>
+  <text x="1318" y="660" class="sh">Policy Update</text><text x="1318" y="685" class="small">PPO clip + reference KL</text>
   <path d="M1278 603 L1278 621 L1182 621 L1182 630" class="arrow2"/><text x="1194" y="617" class="label">group rewards</text>
-  <path d="M1265 669 L1290 669" class="arrow2"/><text x="1268" y="654" class="label">advantage</text>
+  <path d="M1255 669 L1300 669" class="arrow2"/><text x="1255" y="724" class="label">advantage</text>
   <path d="M1455 650 C1490 626 1490 712 1455 690" class="dash"/>
   <text x="1110" y="748" class="label">iterate policy θ on validation logged positives only</text>
 

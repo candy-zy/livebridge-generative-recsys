@@ -16,7 +16,7 @@
 
 ## Architecture
 
-![LiveBridge-GenRec architecture](figures/livebridge_architecture.png)
+![LiveBridge-GenRec architecture](docs/livebridge_architecture.svg)
 
 生成式召回分支：[`docs/generative_retrieval_architecture.svg`](docs/generative_retrieval_architecture.svg)。
 
