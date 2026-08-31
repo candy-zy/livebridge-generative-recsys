@@ -1,0 +1,27 @@
+{
+  "alignment_gate_passed": true,
+  "candidate_universe_safe": true,
+  "id_valid_recall@40": 0.03178790656698399,
+  "content_valid_recall@40": 0.03696770191478148,
+  "content_valid_recall@40_gain": 0.005179795347797486,
+  "id_test": {
+    "recall@10": 0.01756928833978205,
+    "ndcg@10": 0.05290575945671484,
+    "recall@20": 0.0258517154229967,
+    "ndcg@20": 0.04597581670152152,
+    "recall@40": 0.035873963092742565,
+    "ndcg@40": 0.04377167160411469,
+    "users": 21825
+  },
+  "content_test": {
+    "recall@10": 0.02331241307723644,
+    "ndcg@10": 0.06465297385722552,
+    "recall@20": 0.03169076086732187,
+    "ndcg@20": 0.05497895570063556,
+    "recall@40": 0.04300247522022145,
+    "ndcg@40": 0.05231118138608468,
+    "users": 21825
+  },
+  "gate_passed": true,
+  "next_step": "replicate and compare tuned SASRec"
+}

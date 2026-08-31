@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">LiveBridge Semantic-ID generative retrieval architecture</title>
+  <desc id="desc">Leakage-safe content alignment, behavioral semantic IDs, autoregressive generation, cached late fusion, and offline evaluation.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F8FAFC"/><stop offset="1" stop-color="#EEF2FF"/></linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#EFF6FF"/><stop offset="1" stop-color="#DBEAFE"/></linearGradient>
+    <linearGradient id="violet" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F5F3FF"/><stop offset="1" stop-color="#EDE9FE"/></linearGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFFBEB"/><stop offset="1" stop-color="#FEF3C7"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0F172A" flood-opacity=".12"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5 0 10z" fill="#475569"/></marker>
+    <style>
+      .title{font:700 34px Arial,'PingFang SC',sans-serif;fill:#0F172A}.sub{font:400 16px Arial,'PingFang SC',sans-serif;fill:#64748B}.stage{font:700 13px Arial,'PingFang SC',sans-serif;letter-spacing:1px;fill:#64748B}.h{font:700 20px Arial,'PingFang SC',sans-serif;fill:#172554}.t{font:400 14px Arial,'PingFang SC',sans-serif;fill:#475569}.small{font:400 12px Arial,'PingFang SC',sans-serif;fill:#64748B}.chip{font:700 12px Arial,'PingFang SC',sans-serif;fill:#334155}.metric{font:700 17px Arial,'PingFang SC',sans-serif;fill:#9A3412}.box{stroke-width:2;filter:url(#shadow)}.inner{fill:#FFF;stroke:#CBD5E1;stroke-width:1.5}.arrow{fill:none;stroke:#475569;stroke-width:4;marker-end:url(#arrow)}.dash{fill:none;stroke:#7C3AED;stroke-width:3;stroke-dasharray:8 6;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <text x="60" y="58" class="title">LiveBridge：Semantic-ID 生成式召回与内容对齐</text>
+  <text x="60" y="88" class="sub">Behaviour-stable discrete targets · Author-disjoint multimodal alignment · Cached content late fusion</text>
+
+  <text x="55" y="140" class="stage">01  PUBLIC SIGNALS</text>
+  <text x="325" y="140" class="stage">02  LEAKAGE-SAFE ALIGNMENT</text>
+  <text x="650" y="140" class="stage">03  SEMANTIC IDS</text>
+  <text x="920" y="140" class="stage">04  AUTOREGRESSIVE RETRIEVAL</text>
+  <text x="1245" y="140" class="stage">05  FAST FUSION &amp; EVAL</text>
+
+  <rect x="45" y="160" width="235" height="500" rx="18" fill="url(#blue)" stroke="#3B82F6" class="box"/>
+  <text x="68" y="200" class="h">KuaiLive-M3</text>
+  <rect x="68" y="230" width="190" height="92" rx="10" class="inner"/><text x="84" y="258" class="chip">短视频内容</text><text x="84" y="283" class="t">photo_emb_128</text><text x="84" y="304" class="small">官方预计算 128D</text>
+  <rect x="68" y="340" width="190" height="92" rx="10" class="inner"/><text x="84" y="368" class="chip">直播内容</text><text x="84" y="393" class="t">live_emb_64</text><text x="84" y="414" class="small">官方预计算 64D</text>
+  <rect x="68" y="450" width="190" height="92" rx="10" class="inner"/><text x="84" y="478" class="chip">行为与映射</text><text x="84" y="503" class="t">live.csv + metadata</text><text x="84" y="524" class="small">user · author · time</text>
+  <rect x="68" y="560" width="190" height="68" rx="10" fill="#FFF" stroke="#3B82F6" stroke-width="2"/><text x="84" y="588" class="chip">时间门禁</text><text x="84" y="610" class="small">train / valid / untouched test</text>
+
+  <rect x="315" y="160" width="280" height="500" rx="18" fill="url(#violet)" stroke="#8B5CF6" class="box"/>
+  <text x="338" y="200" class="h">作者级内容对齐</text>
+  <rect x="338" y="230" width="234" height="80" rx="10" class="inner"/><text x="354" y="258" class="chip">Streaming Author Mean</text><text x="354" y="282" class="small">PyArrow 分批扫描，不缩候选集</text>
+  <rect x="338" y="330" width="234" height="104" rx="10" class="inner"/><text x="354" y="358" class="chip">Dual Projection Towers</text><text x="354" y="382" class="t">128D → 64D ← 64D</text><text x="354" y="407" class="small">Symmetric InfoNCE</text>
+  <rect x="338" y="454" width="234" height="82" rx="10" fill="#FFF" stroke="#8B5CF6" stroke-width="2"/><text x="354" y="482" class="chip">Author-disjoint Gate</text><text x="354" y="506" class="small">learned R@10 &gt; fixed projection</text>
+  <rect x="338" y="556" width="234" height="72" rx="10" class="inner"/><text x="354" y="584" class="chip">Aligned Content Cache</text><text x="354" y="608" class="small">coverage mask · no future segments</text>
+
+  <rect x="630" y="160" width="235" height="500" rx="18" fill="url(#violet)" stroke="#7C3AED" class="box"/>
+  <text x="653" y="200" class="h">行为 Semantic ID</text>
+  <rect x="653" y="230" width="189" height="92" rx="10" class="inner"/><text x="669" y="258" class="chip">Creator-Bridge</text><text x="669" y="282" class="t">共享 Creator 表征</text><text x="669" y="304" class="small">短视频兴趣 → 直播空间</text>
+  <rect x="653" y="342" width="189" height="108" rx="10" class="inner"/><text x="669" y="370" class="chip">Residual K-Means</text><text x="669" y="394" class="t">3-level codes</text><text x="669" y="418" class="small">32 × 32 × 32 vocabulary</text><text x="669" y="438" class="small">deterministic by seed</text>
+  <rect x="653" y="474" width="189" height="72" rx="10" fill="#FFF7ED" stroke="#F97316" stroke-width="2"/><text x="669" y="502" class="chip">关键设计</text><text x="669" y="526" class="small">内容不进入目标码空间</text>
+  <rect x="653" y="566" width="189" height="62" rx="10" class="inner"/><text x="669" y="592" class="chip">Collision Audit</text><text x="669" y="614" class="small">unique codes · max collision</text>
+
+  <rect x="900" y="160" width="300" height="500" rx="18" fill="url(#blue)" stroke="#2563EB" class="box"/>
+  <text x="923" y="200" class="h">Causal Transformer</text>
+  <rect x="923" y="230" width="254" height="82" rx="10" class="inner"/><text x="939" y="258" class="chip">History Encoder</text><text x="939" y="282" class="small">code embedding + position + causal mask</text>
+  <path d="M1050 312V342" class="arrow"/>
+  <rect x="923" y="350" width="254" height="92" rx="10" class="inner"/><text x="939" y="378" class="chip">Autoregressive Decoder</text><text x="939" y="402" class="t">GRU code-level decoding</text><text x="939" y="424" class="small">teacher forcing · 50 epochs</text>
+  <path d="M1050 442V472" class="arrow"/>
+  <rect x="923" y="480" width="254" height="84" rx="10" class="inner"/><text x="939" y="508" class="chip">Beam Search</text><text x="939" y="532" class="t">beam=100 → author candidates</text><text x="939" y="552" class="small">train-popularity only as fallback</text>
+  <rect x="923" y="584" width="254" height="44" rx="10" fill="#2563EB"/><text x="956" y="612" style="font:700 14px Arial,'PingFang SC',sans-serif;fill:#FFF">Cached Top-200 Candidates</text>
+
+  <rect x="1235" y="160" width="320" height="500" rx="18" fill="url(#amber)" stroke="#F59E0B" class="box"/>
+  <text x="1258" y="200" class="h">Content Late Fusion</text>
+  <rect x="1258" y="230" width="274" height="100" rx="10" class="inner"/><text x="1274" y="258" class="chip">User Content Centroid</text><text x="1274" y="282" class="t">mean(history author content)</text><text x="1274" y="306" class="small">cached dot-product reranking</text>
+  <rect x="1258" y="350" width="274" height="92" rx="10" class="inner"/><text x="1274" y="378" class="chip">Validation-only α Sweep</text><text x="1274" y="402" class="t">0 · .05 · .1 · .2 · .35 · .5</text><text x="1274" y="424" class="small">α=0 safe fallback · test untouched</text>
+  <rect x="1258" y="462" width="274" height="92" rx="10" class="inner"/><text x="1274" y="490" class="chip">Full-sort Evaluation</text><text x="1274" y="514" class="t">Recall / NDCG @10/20/40</text><text x="1274" y="536" class="small">per-user CSV · 3-seed bootstrap</text>
+  <rect x="1258" y="574" width="274" height="54" rx="10" fill="#D97706"/><text x="1296" y="607" style="font:700 14px Arial,'PingFang SC',sans-serif;fill:#FFF">Offline metrics ≠ online revenue</text>
+
+  <path d="M280 408H315" class="arrow"/><path d="M595 408H630" class="arrow"/><path d="M865 408H900" class="arrow"/><path d="M1200 408H1235" class="arrow"/>
+
+  <rect x="45" y="705" width="1510" height="130" rx="18" fill="#FFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="68" y="742" class="h">与实时 Agent / GRPO 链路的关系</text>
+  <text x="68" y="772" class="t">离线慢路径：跨模态对齐、Semantic-ID 训练与 Agent 策略更新</text>
+  <text x="68" y="800" class="t">在线快路径：缓存候选 + 内容点积重排 → 状态过滤 / 快速 Ranker；不把复杂 Agent 推理放进直播请求热链路</text>
+  <path d="M1110 786H1465" class="dash"/><text x="1185" y="774" class="chip">可选接入 Constrained GRPO Slate Reranker</text>
+
+  <text x="55" y="875" class="small">1% users · seeds 42/43/44 · 10% seed42 scale validation · public KuaiLive-M3 · all reported gains are offline</text>
+</svg>

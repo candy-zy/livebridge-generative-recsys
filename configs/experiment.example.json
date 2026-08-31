@@ -1,0 +1,10 @@
+{
+  "experiment_name": "cdr_smoke",
+  "seed": 42,
+  "sample_ratio": 0.01,
+  "min_interactions": 5,
+  "source_domain": "short_video",
+  "target_domain": "live_author",
+  "target_split": [0.8, 0.1, 0.1],
+  "metrics": ["Recall@10", "Recall@20", "NDCG@10", "NDCG@20"]
+}

@@ -1,0 +1,52 @@
+{
+  "requests": 10000,
+  "sessions": 2169,
+  "device": "cpu",
+  "policy_update": {
+    "p50_ms": 0.05918089300394058,
+    "p95_ms": 0.06090113893151283,
+    "p99_ms": 0.06423525512218475
+  },
+  "cached_fast_ranker": {
+    "p50_ms": 0.11540763080120087,
+    "p95_ms": 0.11809738352894783,
+    "p99_ms": 0.12088010087609291
+  },
+  "synchronous_policy_plus_ranker": {
+    "p50_ms": 0.18609687685966492,
+    "p95_ms": 0.19026007503271103,
+    "p99_ms": 0.1954027079045773
+  },
+  "ttl": {
+    "10": {
+      "policy_cache_hit_rate": 0.8586,
+      "refresh_rate": 0.1414
+    },
+    "30": {
+      "policy_cache_hit_rate": 0.9966,
+      "refresh_rate": 0.0034
+    },
+    "60": {
+      "policy_cache_hit_rate": 1.0,
+      "refresh_rate": 0.0
+    }
+  },
+  "failure_injection": {
+    "0.1": {
+      "invalid_exposure_rate_without_filter": 0.09765625,
+      "invalid_exposure_rate_with_filter": 0.0,
+      "fallback_success_rate": 1.0
+    },
+    "0.3": {
+      "invalid_exposure_rate_without_filter": 0.3009765625,
+      "invalid_exposure_rate_with_filter": 0.0,
+      "fallback_success_rate": 1.0
+    }
+  },
+  "architecture_boundary": {
+    "training_in_hot_path": false,
+    "llm_in_hot_path": false,
+    "policy_refresh": "asynchronous TTL cache",
+    "request_path": "cached action -> live-status filter -> fast ranker"
+  }
+}

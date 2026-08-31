@@ -1,0 +1,69 @@
+{
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "sampling": "1% users per seed; chronological source-train/valid/test split",
+  "split_audit_same_users_train_counts_buckets": {
+    "42": true,
+    "43": true,
+    "44": true
+  },
+  "paired_hierarchical_user_bootstrap": {
+    "recall@10": {
+      "fusion_minus_id_mean": 0.02266245369963929,
+      "ci95_low": 0.016793886604764167,
+      "ci95_high": 0.028669160401083617,
+      "all_seed_directions_positive": true
+    },
+    "ndcg@10": {
+      "fusion_minus_id_mean": 0.04313234095101579,
+      "ci95_low": 0.03367594841963391,
+      "ci95_high": 0.05286526420972997,
+      "all_seed_directions_positive": true
+    },
+    "recall@20": {
+      "fusion_minus_id_mean": 0.030036354477551836,
+      "ci95_low": 0.022395405323544927,
+      "ci95_high": 0.037571128674481785,
+      "all_seed_directions_positive": true
+    },
+    "ndcg@20": {
+      "fusion_minus_id_mean": 0.03866629187135542,
+      "ci95_low": 0.03136094864684883,
+      "ci95_high": 0.04637793150708504,
+      "all_seed_directions_positive": true
+    },
+    "recall@40": {
+      "fusion_minus_id_mean": 0.03480675519870705,
+      "ci95_low": 0.027406286578473413,
+      "ci95_high": 0.04251784713216004,
+      "all_seed_directions_positive": true
+    },
+    "ndcg@40": {
+      "fusion_minus_id_mean": 0.03630899858202712,
+      "ci95_low": 0.029942669514094945,
+      "ci95_high": 0.04284163258171469,
+      "all_seed_directions_positive": true
+    }
+  },
+  "relative_gain_of_fusion": {
+    "id": {
+      "recall@10": 0.5528774522788547,
+      "ndcg@10": 0.7080164505073971,
+      "recall@20": 0.44223324553639287,
+      "ndcg@20": 0.581626270717996,
+      "recall@40": 0.3431505861162547,
+      "ndcg@40": 0.46493048828144423
+    },
+    "sasrec_tuned": {
+      "recall@10": 4.022119975448792,
+      "ndcg@10": 4.362086217992824,
+      "recall@20": 3.83284347581254,
+      "ndcg@20": 4.103852235364638,
+      "recall@40": 3.0265001983273123,
+      "ndcg@40": 3.5312952418771717
+    }
+  }
+}

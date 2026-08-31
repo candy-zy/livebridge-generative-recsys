@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="940" viewBox="0 0 1600 940" role="img" aria-labelledby="title desc">
+  <title id="title">LiveBridge session Agentic RL and hierarchical serving architecture</title>
+  <desc id="desc">Offline GRPO policy training, asynchronous session-level tool routing, TTL policy cache, live-status filtering, fast ranking and bridge fallback.</desc>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ECFDF5"/><stop offset="1" stop-color="#D1FAE5"/></linearGradient>
+    <linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EFF6FF"/><stop offset="1" stop-color="#DBEAFE"/></linearGradient>
+    <linearGradient id="p" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F5F3FF"/><stop offset="1" stop-color="#EDE9FE"/></linearGradient>
+    <linearGradient id="o" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF7ED"/><stop offset="1" stop-color="#FFEDD5"/></linearGradient>
+    <marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M0 0 L12 6 L0 12 Z" fill="#334155"/></marker>
+    <style>
+      .title{font:700 31px Arial,'PingFang SC',sans-serif;fill:#0F172A}.sub{font:400 15px Arial,'PingFang SC',sans-serif;fill:#64748B}.lane{font:700 16px Arial,'PingFang SC',sans-serif;fill:#334155;letter-spacing:1px}.h{font:700 18px Arial,'PingFang SC',sans-serif;fill:#0F172A}.t{font:400 13px Arial,'PingFang SC',sans-serif;fill:#475569}.s{font:400 12px Arial,'PingFang SC',sans-serif;fill:#64748B}.chip{font:700 12px Arial,'PingFang SC',sans-serif;fill:#334155}.white{font:700 15px Arial,'PingFang SC',sans-serif;fill:#fff}.metric{font:700 16px Arial,'PingFang SC',sans-serif;fill:#C2410C}
+      .box{stroke-width:2}.inner{fill:#fff;stroke-width:1.5}.arr{fill:none;stroke:#334155;stroke-width:4.5;marker-end:url(#a)}.dash{fill:none;stroke:#475569;stroke-width:3.5;stroke-dasharray:9 7;marker-end:url(#a)}.label{font:700 11px Arial,'PingFang SC',sans-serif;fill:#334155}
+    </style>
+  </defs>
+  <rect width="1600" height="940" fill="#fff"/>
+  <text x="50" y="52" class="title">LiveBridge Agentic RL：异步策略与直播实时热链路分层</text>
+  <text x="50" y="80" class="sub">Offline trajectory learning · Session-level tool routing · TTL cache · LiveStatusFilter · Fast fallback</text>
+
+  <!-- offline lane -->
+  <rect x="40" y="110" width="1520" height="250" rx="18" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="65" y="143" class="lane">A. OFFLINE POLICY LEARNING（不在请求热链路）</text>
+  <rect x="65" y="165" width="220" height="150" rx="12" fill="url(#g)" stroke="#10B981" class="box"/>
+  <text x="85" y="197" class="h">KuaiLive-M3</text><text x="85" y="222" class="t">短视频源域 + 直播目标域</text>
+  <text x="85" y="248" class="s">逐用户时间门禁</text><text x="85" y="270" class="s">valid 训练 / test 隔离</text><text x="85" y="292" class="s">公开作者内容画像</text>
+
+  <rect x="340" y="165" width="220" height="150" rx="12" fill="url(#b)" stroke="#2563EB" class="box"/>
+  <text x="360" y="197" class="h">Shared Candidate Cache</text><text x="360" y="222" class="t">Creator-Bridge Top-100</text>
+  <text x="360" y="248" class="s">bridge / source / content</text><text x="360" y="270" class="s">popularity / long-tail features</text><text x="360" y="292" class="s">跨变体复用，避免重复 full-sort</text>
+
+  <rect x="615" y="165" width="245" height="150" rx="12" fill="url(#p)" stroke="#7C3AED" class="box"/>
+  <text x="635" y="197" class="h">LiveSessionEnv</text><text x="635" y="222" class="t">Gymnasium replay state machine</text>
+  <text x="635" y="248" class="s">会话特征 · 历史反馈 · miss streak</text><text x="635" y="270" class="s">去重 slate · 工具 trace</text><text x="635" y="292" class="s">logged-positive reward proxy</text>
+
+  <rect x="915" y="165" width="275" height="150" rx="12" fill="url(#p)" stroke="#7C3AED" class="box"/>
+  <text x="935" y="197" class="h">Session Policy + GRPO</text><text x="935" y="222" class="t">causal warm-start → trajectory update</text>
+  <text x="935" y="248" class="s">group-relative advantage · PPO Clip</text><text x="935" y="270" class="s">frozen-policy Reference KL</text><text x="935" y="292" class="s">动作熵 / switch / tool-call audit</text>
+
+  <rect x="1245" y="165" width="285" height="150" rx="12" fill="url(#o)" stroke="#EA580C" class="box"/>
+  <text x="1265" y="197" class="h">10% Stop/Go Gate</text><text x="1265" y="222" class="t">Agent vs Fixed / Contextual</text>
+  <text x="1265" y="250" class="metric">Accuracy gate: NOT PASSED</text><text x="1265" y="274" class="s">不声称 Agent 准确率提升</text><text x="1265" y="296" class="s">取消全量烧卡，保留服务实验</text>
+
+  <path d="M285 240 H340" class="arr"/><text x="292" y="225" class="label">safe events</text>
+  <path d="M560 240 H615" class="arr"/><text x="568" y="225" class="label">features</text>
+  <path d="M860 240 H915" class="arr"/><text x="868" y="225" class="label">trajectories</text>
+  <path d="M1190 240 H1245" class="arr"/><text x="1196" y="225" class="label">metrics</text>
+
+  <!-- async control lane -->
+  <rect x="40" y="390" width="1520" height="215" rx="18" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="65" y="423" class="lane">B. ASYNCHRONOUS SESSION CONTROL（秒级刷新，可缓存）</text>
+  <rect x="75" y="450" width="230" height="115" rx="12" fill="url(#g)" stroke="#10B981" class="box"/>
+  <text x="95" y="482" class="h">Session Events</text><text x="95" y="508" class="t">watch · skip · follow · miss</text><text x="95" y="534" class="s">只使用已经发生的反馈</text>
+
+  <rect x="375" y="450" width="235" height="115" rx="12" fill="url(#b)" stroke="#2563EB" class="box"/>
+  <text x="395" y="482" class="h">State &amp; Memory</text><text x="395" y="508" class="t">profile · history · freshness</text><text x="395" y="534" class="s">会话级，而非逐请求训练</text>
+
+  <rect x="680" y="440" width="300" height="135" rx="12" fill="url(#p)" stroke="#7C3AED" class="box"/>
+  <text x="700" y="474" class="h">Tool-routing Agent</text>
+  <rect x="700" y="495" width="58" height="36" rx="8" class="inner" stroke="#A78BFA"/><text x="711" y="518" class="chip">Bridge</text>
+  <rect x="766" y="495" width="58" height="36" rx="8" class="inner" stroke="#A78BFA"/><text x="777" y="518" class="chip">Source</text>
+  <rect x="832" y="495" width="64" height="36" rx="8" class="inner" stroke="#A78BFA"/><text x="841" y="518" class="chip">Content</text>
+  <rect x="904" y="495" width="58" height="36" rx="8" class="inner" stroke="#A78BFA"/><text x="913" y="518" class="chip">Explore</text>
+  <text x="700" y="554" class="s">输出 route recipe / quota / policy version</text>
+
+  <rect x="1050" y="450" width="235" height="115" rx="12" fill="url(#o)" stroke="#EA580C" class="box"/>
+  <text x="1070" y="482" class="h">TTL Policy Cache</text><text x="1070" y="508" class="t">10 / 30 / 60 sec</text><text x="1070" y="534" class="s">30s simulated hit: 99.66%</text>
+
+  <rect x="1350" y="450" width="180" height="115" rx="12" fill="#334155" stroke="#0F172A" class="box"/>
+  <text x="1380" y="487" class="white">Versioned Action</text><text x="1388" y="516" class="white">No LLM call</text><text x="1375" y="545" class="white">No training request</text>
+
+  <path d="M305 507 H375" class="arr"/><text x="318" y="491" class="label">feedback</text>
+  <path d="M610 507 H680" class="arr"/><text x="622" y="491" class="label">state</text>
+  <path d="M980 507 H1050" class="arr"/><text x="988" y="491" class="label">refresh</text>
+  <path d="M1285 507 H1350" class="arr"/><text x="1292" y="491" class="label">cache hit</text>
+
+  <!-- hot path -->
+  <rect x="40" y="635" width="1520" height="245" rx="18" fill="#FFF7ED" stroke="#FDBA74" stroke-width="2"/>
+  <text x="65" y="668" class="lane">C. REAL-TIME REQUEST HOT PATH（直播供给持续变化）</text>
+  <rect x="70" y="705" width="190" height="110" rx="12" fill="url(#g)" stroke="#10B981" class="box"/>
+  <text x="90" y="742" class="h">Recommendation</text><text x="90" y="769" class="t">user + session request</text><text x="90" y="793" class="s">batch=1 request path</text>
+
+  <rect x="320" y="705" width="205" height="110" rx="12" fill="url(#o)" stroke="#EA580C" class="box"/>
+  <text x="340" y="742" class="h">Cached Route</text><text x="340" y="769" class="t">read action / quota</text><text x="340" y="793" class="s">timeout → Bridge fallback</text>
+
+  <rect x="585" y="705" width="220" height="110" rx="12" fill="url(#b)" stroke="#2563EB" class="box"/>
+  <text x="605" y="742" class="h">LiveStatusFilter</text><text x="605" y="769" class="t">关播 / 失效 / stale 去除</text><text x="605" y="793" class="s">invalid exposure → 0</text>
+
+  <rect x="865" y="705" width="220" height="110" rx="12" fill="url(#p)" stroke="#7C3AED" class="box"/>
+  <text x="885" y="742" class="h">Fast Ranker</text><text x="885" y="769" class="t">cached features → Top-10</text><text x="885" y="793" class="s">CPU P95 = 0.118ms</text>
+
+  <rect x="1145" y="690" width="375" height="140" rx="12" fill="#fff" stroke="#F97316" stroke-width="2"/>
+  <text x="1165" y="724" class="h">Failure &amp; Latency Audit</text>
+  <text x="1165" y="751" class="t">Sync policy + ranker P95: 0.190ms</text>
+  <text x="1165" y="776" class="t">10% / 30% invalid injection → 0 exposure</text>
+  <text x="1165" y="801" class="t">Bridge fallback success: 100%</text>
+
+  <path d="M260 760 H320" class="arr"/><text x="270" y="744" class="label">request</text>
+  <path d="M525 760 H585" class="arr"/><text x="536" y="744" class="label">slate plan</text>
+  <path d="M805 760 H865" class="arr"/><text x="813" y="744" class="label">valid pool</text>
+  <path d="M1085 760 H1145" class="arr"/><text x="1095" y="744" class="label">Top-10</text>
+  <path d="M422 705 V675 H695 V705" class="dash"/><text x="455" y="664" class="label">timeout selects Bridge fallback before live filtering</text>
+
+  <text x="50" y="915" class="s">Offline prototype boundary: public KuaiLive-M3 temporal 10% replay; latency is local CPU microbenchmark, not production SLA; offline proxy ≠ online CTR / watch time / GMV.</text>
+</svg>

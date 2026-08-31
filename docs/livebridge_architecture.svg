@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1120" viewBox="0 0 1800 1120" role="img" aria-labelledby="title desc">
+  <title id="title">LiveBridge-GRPO system architecture</title>
+  <desc id="desc">End-to-end architecture from KuaiLive-M3 data through time-safe preprocessing, Creator-Bridge recall, constrained GRPO slate reranking, and offline evaluation.</desc>
+  <defs>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ECFDF5"/><stop offset="1" stop-color="#D1FAE5"/></linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EFF6FF"/><stop offset="1" stop-color="#DBEAFE"/></linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F5F3FF"/><stop offset="1" stop-color="#EDE9FE"/></linearGradient>
+    <linearGradient id="orange" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF7ED"/><stop offset="1" stop-color="#FFEDD5"/></linearGradient>
+    <linearGradient id="slate" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F8FAFC"/><stop offset="1" stop-color="#F1F5F9"/></linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.10"/></filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L12,6 L0,12 z" fill="#334155"/></marker>
+    <style>
+      .title{font:700 34px Arial,'PingFang SC',sans-serif;fill:#0F172A}.subtitle{font:400 17px Arial,'PingFang SC',sans-serif;fill:#64748B}
+      .stage{font:700 14px Arial,'PingFang SC',sans-serif;letter-spacing:1.2px;fill:#475569}.h{font:700 22px Arial,'PingFang SC',sans-serif;fill:#0F172A}.sh{font:700 16px Arial,'PingFang SC',sans-serif;fill:#1E293B}.t{font:400 14px Arial,'PingFang SC',sans-serif;fill:#475569}.small{font:400 12px Arial,'PingFang SC',sans-serif;fill:#64748B}.metric{font:700 18px Arial,'PingFang SC',sans-serif;fill:#C2410C}.chip{font:700 12px Arial,'PingFang SC',sans-serif;fill:#334155}
+      .box{stroke-width:2}.inner{fill:#FFFFFF;stroke-width:1.5}.arrow{fill:none;stroke:#334155;stroke-width:5;marker-end:url(#arrow)}.arrow2{fill:none;stroke:#475569;stroke-width:4;marker-end:url(#arrow)}.dash{fill:none;stroke:#64748B;stroke-width:3;stroke-dasharray:9 7;marker-end:url(#arrow)}.label{font:700 12px Arial,'PingFang SC',sans-serif;fill:#334155}
+    </style>
+  </defs>
+
+  <rect width="1800" height="1120" fill="#FFFFFF"/>
+  <text x="70" y="62" class="title">LiveBridge-GRPO：短视频 → 直播跨域推荐与长程策略优化</text>
+  <text x="70" y="94" class="subtitle">Time-safe cross-domain recall · Constrained group-relative slate optimization · Auditable offline evaluation</text>
+
+  <text x="70" y="145" class="stage">01  PUBLIC DATA</text>
+  <text x="375" y="145" class="stage">02  TIME-SAFE DATA LAYER</text>
+  <text x="730" y="145" class="stage">03  CROSS-DOMAIN RECALL</text>
+  <text x="1090" y="145" class="stage">04  LONG-HORIZON RERANKING</text>
+  <text x="1520" y="145" class="stage">05  EVALUATION</text>
+
+  <!-- Stage 1: raw public data -->
+  <rect x="55" y="165" width="270" height="510" rx="16" fill="url(#green)" stroke="#10B981" class="box" filter="url(#shadow)"/>
+  <text x="80" y="205" class="h">KuaiLive-M3</text>
+  <text x="80" y="230" class="t">公开跨域直播推荐数据集</text>
+
+  <rect x="78" y="260" width="224" height="105" rx="10" class="inner" stroke="#34D399"/>
+  <text x="96" y="290" class="sh">直播目标域</text>
+  <text x="96" y="316" class="t">live_interaction.csv</text>
+  <text x="96" y="340" class="small">user · author · timestamp · duration</text>
+
+  <rect x="78" y="385" width="224" height="105" rx="10" class="inner" stroke="#34D399"/>
+  <text x="96" y="415" class="sh">短视频源域</text>
+  <text x="96" y="441" class="t">photo_play.parquet</text>
+  <text x="96" y="465" class="small">watch · complete · like · follow</text>
+
+  <rect x="78" y="510" width="224" height="105" rx="10" class="inner" stroke="#34D399"/>
+  <text x="96" y="540" class="sh">作者公开画像</text>
+  <text x="96" y="566" class="t">author_profile.csv</text>
+  <text x="96" y="590" class="small">age · gender · fans · domain flags</text>
+
+  <!-- Stage 2: preprocessing -->
+  <rect x="360" y="165" width="315" height="510" rx="16" fill="url(#blue)" stroke="#2563EB" class="box" filter="url(#shadow)"/>
+  <text x="385" y="205" class="h">时间安全预处理</text>
+  <text x="385" y="230" class="t">Streaming CSV / Parquet pipeline</text>
+
+  <rect x="385" y="260" width="265" height="70" rx="10" class="inner" stroke="#60A5FA"/>
+  <text x="403" y="290" class="sh">用户级确定性采样</text><text x="403" y="314" class="small">1% users · seeds 42 / 43 / 44</text>
+  <rect x="385" y="347" width="265" height="82" rx="10" class="inner" stroke="#60A5FA"/>
+  <text x="403" y="377" class="sh">直播时序切分</text><text x="403" y="401" class="small">per-user chronological 80 / 10 / 10</text><text x="403" y="419" class="small">train → valid → untouched test</text>
+  <rect x="385" y="446" width="265" height="82" rx="10" class="inner" stroke="#60A5FA"/>
+  <text x="403" y="476" class="sh">逐用户时间门禁</text><text x="403" y="500" class="small">source timestamp ≤ live train cutoff</text><text x="403" y="518" class="small">阻断未来短视频行为泄漏</text>
+  <rect x="385" y="545" width="265" height="82" rx="10" class="inner" stroke="#60A5FA"/>
+  <text x="403" y="575" class="sh">清洗与数据契约</text><text x="403" y="599" class="small">K-core · dedup · positive watch</text><text x="403" y="617" class="small">live.csv + photo_author.csv + metadata</text>
+
+  <!-- Stage 3: recall -->
+  <rect x="715" y="165" width="325" height="510" rx="16" fill="url(#purple)" stroke="#7C3AED" class="box" filter="url(#shadow)"/>
+  <text x="740" y="205" class="h">Creator-Bridge 召回</text>
+  <text x="740" y="230" class="t">Shared creator-space BPR</text>
+
+  <rect x="740" y="260" width="275" height="78" rx="10" class="inner" stroke="#A78BFA"/>
+  <text x="758" y="289" class="sh">直播协同信号</text><text x="758" y="315" class="small">user–live author positive pairs</text>
+  <rect x="740" y="355" width="275" height="78" rx="10" class="inner" stroke="#A78BFA"/>
+  <text x="758" y="384" class="sh">短视频 Creator Affinity</text><text x="758" y="410" class="small">weighted source engagement evidence</text>
+  <path d="M777 462 L777 500 L855 500" class="arrow2"/><path d="M977 462 L977 500 L899 500" class="arrow2"/>
+  <text x="752" y="458" class="small">User Emb.</text><text x="936" y="458" class="small">Creator Emb.</text>
+  <rect x="790" y="480" width="175" height="82" rx="41" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="2.5"/>
+  <text x="827" y="514" class="sh">Shared Space</text><text x="818" y="540" class="small">BPR + negative sampling</text>
+  <rect x="740" y="585" width="275" height="52" rx="10" fill="#6D28D9"/>
+  <text x="777" y="617" style="font:700 16px Arial,'PingFang SC',sans-serif;fill:#FFFFFF">Frozen Top-50 Candidates</text>
+
+  <!-- Stage 4: GRPO -->
+  <rect x="1075" y="165" width="405" height="700" rx="16" fill="url(#purple)" stroke="#7C3AED" class="box" filter="url(#shadow)"/>
+  <text x="1100" y="205" class="h">Constrained GRPO Slate Policy</text>
+  <text x="1100" y="230" class="t">Top-50 → Top-10 · group size 8 · no replacement</text>
+
+  <rect x="1100" y="260" width="355" height="90" rx="10" class="inner" stroke="#A78BFA"/>
+  <text x="1118" y="289" class="sh">Policy Feature Bank</text>
+  <text x="1118" y="315" class="small">base score · source affinity · profile affinity</text>
+  <text x="1118" y="334" class="small">popularity · long-tail indicator</text>
+
+  <path d="M1278 350 L1278 380" class="arrow2"/>
+  <text x="1292" y="371" class="label">feature vector</text>
+  <rect x="1100" y="390" width="165" height="75" rx="10" class="inner" stroke="#A78BFA"/>
+  <text x="1118" y="420" class="sh">Residual Policy</text><text x="1118" y="444" class="small">reference logits + Δθ</text>
+  <rect x="1290" y="390" width="165" height="75" rx="10" class="inner" stroke="#A78BFA"/>
+  <text x="1308" y="420" class="sh">PL Sampling</text><text x="1308" y="444" class="small">8 ordered Top-10 slates</text>
+  <path d="M1265 427 L1290 427" class="arrow2"/><text x="1268" y="412" class="label">logits</text>
+
+  <rect x="1100" y="495" width="355" height="108" rx="10" fill="#FFFFFF" stroke="#F59E0B" stroke-width="2"/>
+  <text x="1118" y="525" class="sh">Multi-objective Slate Reward</text>
+  <rect x="1118" y="544" width="62" height="35" rx="8" fill="#FEF3C7"/><text x="1132" y="566" class="chip">相关性</text>
+  <rect x="1188" y="544" width="62" height="35" rx="8" fill="#FEF3C7"/><text x="1202" y="566" class="chip">观看</text>
+  <rect x="1258" y="544" width="76" height="35" rx="8" fill="#FEF3C7"/><text x="1270" y="566" class="chip">源域兴趣</text>
+  <rect x="1342" y="544" width="47" height="35" rx="8" fill="#FEF3C7"/><text x="1353" y="566" class="chip">画像</text>
+  <rect x="1397" y="544" width="42" height="35" rx="8" fill="#FEF3C7"/><text x="1406" y="566" class="chip">长尾</text>
+  <path d="M1372 465 L1372 495" class="arrow2"/><text x="1386" y="486" class="label">sampled slates</text>
+
+  <rect x="1100" y="630" width="165" height="78" rx="10" class="inner" stroke="#A78BFA"/>
+  <text x="1118" y="660" class="sh">Group Advantage</text><text x="1118" y="685" class="small">within-user normalization</text>
+  <rect x="1290" y="630" width="165" height="78" rx="10" class="inner" stroke="#A78BFA"/>
+  <text x="1308" y="660" class="sh">Policy Update</text><text x="1308" y="685" class="small">PPO clip + reference KL</text>
+  <path d="M1278 603 L1278 621 L1182 621 L1182 630" class="arrow2"/><text x="1194" y="617" class="label">group rewards</text>
+  <path d="M1265 669 L1290 669" class="arrow2"/><text x="1268" y="654" class="label">advantage</text>
+  <path d="M1455 650 C1490 626 1490 712 1455 690" class="dash"/>
+  <text x="1110" y="748" class="label">iterate policy θ on validation logged positives only</text>
+
+  <rect x="1100" y="790" width="355" height="48" rx="10" fill="#6D28D9"/>
+  <text x="1193" y="820" style="font:700 17px Arial,'PingFang SC',sans-serif;fill:#FFFFFF">Optimized Top-10 Live Slate</text>
+
+  <!-- Stage 5: outputs -->
+  <rect x="1515" y="165" width="240" height="700" rx="16" fill="url(#orange)" stroke="#EA580C" class="box" filter="url(#shadow)"/>
+  <text x="1540" y="205" class="h">离线评测闭环</text>
+  <text x="1540" y="230" class="t">Untouched test split</text>
+  <rect x="1540" y="260" width="190" height="112" rx="10" class="inner" stroke="#FB923C"/>
+  <text x="1558" y="290" class="sh">Accuracy</text><text x="1558" y="316" class="t">Recall / NDCG</text><text x="1558" y="340" class="small">@10 / @20 / @40</text>
+  <rect x="1540" y="390" width="190" height="112" rx="10" class="inner" stroke="#FB923C"/>
+  <text x="1558" y="420" class="sh">Exposure Audit</text><text x="1558" y="446" class="t">Long-tail · Coverage</text><text x="1558" y="470" class="small">Exposure Gini</text>
+  <rect x="1540" y="520" width="190" height="92" rx="10" class="inner" stroke="#FB923C"/>
+  <text x="1558" y="550" class="sh">Robustness</text><text x="1558" y="576" class="t">3 seeds · ablation</text><text x="1558" y="598" class="small">cold-start buckets</text>
+  <rect x="1540" y="635" width="190" height="90" rx="10" fill="#FFFFFF" stroke="#FB923C" stroke-width="2"/>
+  <text x="1558" y="666" class="metric">R@10  0.1136</text><text x="1558" y="692" class="metric">N@10  0.1717</text><text x="1558" y="714" class="small">mean across 3 seeds</text>
+  <rect x="1540" y="748" width="190" height="90" rx="10" fill="#EA580C"/>
+  <text x="1571" y="782" style="font:700 17px Arial,'PingFang SC',sans-serif;fill:#FFFFFF">Results Dashboard</text><text x="1583" y="807" style="font:400 13px Arial,'PingFang SC',sans-serif;fill:#FFEDD5">JSON / CSV artifacts</text>
+
+  <!-- Main arrows -->
+  <path d="M325 410 L360 410" class="arrow"/><text x="328" y="390" class="label">stream scan</text>
+  <path d="M675 410 L715 410" class="arrow"/><text x="680" y="390" class="label">safe evidence</text>
+  <path d="M1040 610 L1075 610" class="arrow"/><text x="1043" y="590" class="label">Top-50</text>
+  <path d="M1480 814 L1515 814" class="arrow"/><text x="1481" y="794" class="label">Top-10</text>
+
+  <!-- Baseline lane -->
+  <rect x="55" y="715" width="985" height="150" rx="16" fill="url(#slate)" stroke="#94A3B8" stroke-width="2"/>
+  <text x="80" y="750" class="sh">统一强基线与对照实验</text>
+  <text x="80" y="778" class="small">同一时间切分、候选空间和 Full-sort 协议，避免弱基线比较</text>
+  <rect x="80" y="800" width="136" height="42" rx="9" fill="#FFFFFF" stroke="#CBD5E1"/><text x="111" y="826" class="chip">Popularity</text>
+  <rect x="230" y="800" width="136" height="42" rx="9" fill="#FFFFFF" stroke="#CBD5E1"/><text x="265" y="826" class="chip">Target BPR</text>
+  <rect x="380" y="800" width="136" height="42" rx="9" fill="#FFFFFF" stroke="#CBD5E1"/><text x="417" y="826" class="chip">LightGCN</text>
+  <rect x="530" y="800" width="136" height="42" rx="9" fill="#FFFFFF" stroke="#CBD5E1"/><text x="575" y="826" class="chip">SASRec</text>
+  <rect x="680" y="800" width="136" height="42" rx="9" fill="#FFFFFF" stroke="#CBD5E1"/><text x="728" y="826" class="chip">EMCDR</text>
+  <rect x="830" y="800" width="180" height="42" rx="9" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="2"/><text x="860" y="826" class="chip">Creator-Bridge Ref.</text>
+  <path d="M1040 840 L1055 840 L1055 885 L1495 885 L1495 850 L1515 850" class="dash"/><text x="1220" y="880" class="label">same test protocol</text>
+
+  <!-- Governance / reproducibility lane -->
+  <rect x="55" y="910" width="1700" height="145" rx="16" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="80" y="948" class="sh">Audit &amp; Reproducibility Guardrails</text>
+  <rect x="80" y="970" width="300" height="54" rx="10" fill="#FFFFFF" stroke="#94A3B8"/><text x="100" y="994" class="chip">Data contract + metadata</text><text x="100" y="1014" class="small">schema · counts · shared creators</text>
+  <rect x="400" y="970" width="300" height="54" rx="10" fill="#FFFFFF" stroke="#94A3B8"/><text x="420" y="994" class="chip">Strict split isolation</text><text x="420" y="1014" class="small">train model · valid policy · final test</text>
+  <rect x="720" y="970" width="300" height="54" rx="10" fill="#FFFFFF" stroke="#94A3B8"/><text x="740" y="994" class="chip">Reproducible GPU runs</text><text x="740" y="1014" class="small">RTX 5090 · configs · logs · checkpoints</text>
+  <rect x="1040" y="970" width="300" height="54" rx="10" fill="#FFFFFF" stroke="#94A3B8"/><text x="1060" y="994" class="chip">Machine-readable artifacts</text><text x="1060" y="1014" class="small">metrics JSON · per-user CSV · reports</text>
+  <rect x="1360" y="970" width="365" height="54" rx="10" fill="#FFF7ED" stroke="#FB923C"/><text x="1380" y="994" class="chip">Claim boundary</text><text x="1380" y="1014" class="small">offline proxy ≠ online CTR / watch time / GMV</text>
+
+  <text x="70" y="1092" class="small">Figure: LiveBridge-GRPO end-to-end architecture · Public KuaiLive-M3 · 1% users · seeds 42/43/44</text>
+</svg>
